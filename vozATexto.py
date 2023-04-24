@@ -3,6 +3,12 @@ import datetime
 import speech_recognition as sr
 
 def reconocimientoVoz():
+    """
+    Esta función se encarga de realizar la trascripción de voz a texto
+
+    return:
+    l: lista en la cual se guarda todo lo que dice la persona que tiene la palabra 
+    """
     r = sr.Recognizer()
     cont=0
     l=[]
@@ -16,10 +22,10 @@ def reconocimientoVoz():
             try:
                 print("\033c",end="") #Borra la consola
                 print(Fore.YELLOW + "inicia el reconocimiento...\n")
-                hora_actual = datetime.datetime.now().time() #Acceder a la hora
-                hora_actual_str = hora_actual.strftime("%H:%M:%S")
+                horaActual = datetime.datetime.now().time() #Acceder a la hora
+                horaActualStr = horaActual.strftime("%H:%M:%S")
                 text = r.recognize_google(audio, language='es-ES')
-                print(Fore.YELLOW + "Hora: ", Fore.WHITE + hora_actual_str)
+                print(Fore.YELLOW + "Hora: ", Fore.WHITE + horaActualStr)
                 print(Fore.YELLOW + "Has dicho: " + Fore.WHITE +text)
                 l.append(text)
                 print()

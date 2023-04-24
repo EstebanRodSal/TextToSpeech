@@ -3,7 +3,7 @@ import datetime
 import speech_recognition as sr
 
 contCiclo = 0
-asignaciones_anteriores = None
+asignacionesAnteriores = None
 
 def asignaciones():
     """
@@ -21,14 +21,14 @@ def asignaciones():
     from participantes import registroParticipantes as miembros
     from agenda import agendaSesion as ag
     
-    global contCiclo, asignaciones_anteriores
+    global contCiclo, asignacionesAnteriores
     if contCiclo == 0:
         participanteSesion = miembros()
         agenda = ag()
-        asignaciones_anteriores = (participanteSesion, agenda)
+        asignacionesAnteriores = (participanteSesion, agenda)
         contCiclo = 1
     else:
-        participanteSesion, agenda = asignaciones_anteriores
+        participanteSesion, agenda = asignacionesAnteriores
 
     participantes = participanteSesion
     print(Fore.YELLOW + "\nÍndice de participantes:")
@@ -80,22 +80,22 @@ def main():
     """
     es el punto de entrada del programa y es donde se ejecuta la lógica principal del mismo. En primer lugar, 
     se inicializan dos variables: registros es una lista que almacenará todas las intervenciones realizadas 
-    durante la sesión y total_palabras es un diccionario que almacenará la cantidad total de palabras que ha dicho cada participante.
+    durante la sesión y totalPalabras es un diccionario que almacenará la cantidad total de palabras que ha dicho cada participante.
 
     A continuación, se inicia un bucle while True que se ejecutará hasta que el usuario decida terminar la sesión.
     En cada iteración del bucle se solicita al usuario que introduzca la información correspondiente a la intervención realizada 
     por el participante (mediante la función asignaciones()), se reconoce el audio de la intervención (mediante la función reconocimientoVoz()), 
-    se calcula la cantidad de palabras dichas y se almacena toda esta información en la lista registros. También se actualiza el diccionario total_palabras 
+    se calcula la cantidad de palabras dichas y se almacena toda esta información en la lista registros. También se actualiza el diccionario totalPalabras 
     con la cantidad de palabras dichas por el participante en la intervención actual.
 
     Después de cada intervención, se le pregunta al usuario si desea continuar con la sesión o terminarla.
-    Si el usuario decide terminar la sesión, se ordena el diccionario total_palabras por la cantidad de palabras dichas por cada participante
+    Si el usuario decide terminar la sesión, se ordena el diccionario totalPalabras por la cantidad de palabras dichas por cada participante
     en orden descendente y se muestran en pantalla tanto los registros de la sesión como el total de palabras dichas por cada participante.
 
     """
 
     registros = []
-    total_palabras = {}
+    totalPalabras = {}
 
     while True:
         participantes, apartadoAgenda, punto, indiceParticipantes = asignaciones()
@@ -117,10 +117,10 @@ def main():
         registros.append((hablante, apartadoAgenda, punto, hora, transcripcion, cantidadPalabras))
 
         # Suma las palabras dichas por participante
-        if hablante in total_palabras:
-            total_palabras[hablante] += cantidadPalabras
+        if hablante in totalPalabras:
+            totalPalabras[hablante] += cantidadPalabras
         else:
-            total_palabras[hablante] = cantidadPalabras
+            totalPalabras[hablante] = cantidadPalabras
 
         print(Fore.YELLOW + "[1] Sí")
         print(Fore.YELLOW + "[2] No")
@@ -134,7 +134,7 @@ def main():
             break
 
     # Ordenar por cantidad de palabras dichas en orden descendente
-    total_palabras = dict(sorted(total_palabras.items(), key=lambda x: x[1], reverse=True))
+    totalPalabras = dict(sorted(totalPalabras.items(), key=lambda x: x[1], reverse=True))
 
     # Registro de la sesión
     print(Fore.GREEN + "\n\n--- Reporte de la sesión ---\n")
@@ -148,7 +148,7 @@ def main():
 
     # Mostrar total de palabras dichas por participante en orden descendente
     print(Fore.GREEN + "\n\n--- Total de palabras dichas por participante ---\n")
-    for participante, total in total_palabras.items():
+    for participante, total in totalPalabras.items():
         print(Fore.YELLOW + f"{participante}: {total}")
 
 

@@ -1,7 +1,13 @@
 from colorama import Fore, Back, Style
 
 def agendaSesion():
-    """Agenda que permite al usuario incluir apartados y puntos para cada apartado"""
+    """
+    Función que permite al usuario crear una agenda con diferentes apartados y puntos para cada apartado.
+
+    Returns:
+    agenda: Diccionario que contiene los apartados y los puntos asociados a cada uno de ellos.
+    """
+     
     agenda = {}
     cont = 1
 
