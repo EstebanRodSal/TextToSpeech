@@ -1,7 +1,8 @@
 from colorama import Fore, Back, Style
 
 def registroParticipantes ():                                                           
-    """Esta función se encarga de solicitar los miembros de la sesion y almacenarlos dentro de la variable participantes, una vez el ciclo detecta que 
+    """
+    Esta función se encarga de solicitar los miembros de la sesion y almacenarlos dentro de la lista participantes, una vez el ciclo detecta que 
     la longitud de el nuevo nombre ingresado corresponde a 0, automaticamente detiene la solicitud de nombres 
     """
 
