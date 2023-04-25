@@ -6,6 +6,7 @@ Es importante tomar las siguiente:
 *El codigo que se debe ejecutar para que todo funcione corresponde a main.py
 *Es posible que si se ejecuta el codigo sin las librerias instaladas de un error
   las librerias que se tienen que instalar son:
+  
   -Colorama:
     pip install colorama
     
